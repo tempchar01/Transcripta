@@ -87,18 +87,31 @@ The packaged application does not require users to install the full CUDA Toolkit
 
 ## Screenshots
 
-The current 1.0 interface includes:
+### Start
 
-- a centered drag-and-drop start screen;
-- file metadata and waveform preview;
-- Eco / Balanced / Maximum Speed mode selection;
-- one-time local model download;
-- a compact processing screen with progress and ETA;
-- a Ready screen with **Open document**, **Open folder**, and **New transcription**.
+![Transcripta start screen](docs/transcripta-home.png)
 
-Graphite and Pearl themes are both included.
+### File ready for transcription
 
-> Repository screenshots are being prepared from the final 1.0 build.
+![Transcripta file and waveform](docs/transcripta-file.png)
+
+### Performance modes
+
+![Transcripta performance modes](docs/transcripta-modes.png)
+
+### Local model download
+
+![Transcripta model download](docs/transcripta-model-download.png)
+
+### Processing
+
+![Transcripta processing](docs/transcripta-processing.png)
+
+### Ready
+
+![Transcripta ready screen](docs/transcripta-ready.png)
+
+The screenshots show the final 1.0 workflow: **Drop file → Configure → Process → Open DOCX**. Graphite and Pearl themes are both included.
 
 ## Output
 
