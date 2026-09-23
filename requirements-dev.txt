@@ -1,0 +1,3 @@
+# Developer/test-only dependencies. Install after requirements.txt.
+-r requirements.txt
+pytest==8.3.4
