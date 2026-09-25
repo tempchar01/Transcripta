@@ -1,8 +1,8 @@
-# Transcripta
+# Transcripta — Private Local AI Transcription for Windows
 
-**Transcripta 1.0.0** is a lightweight Windows desktop application for private, local audio and video transcription.
+**Transcripta 1.0.0** is a fast, privacy-focused desktop app for offline audio and video transcription on Windows 10/11.
 
-Drop in a recording, choose a performance mode and recording language, and Transcripta creates a DOCX document on your computer. Transcription is powered locally by faster-whisper; your media is not uploaded to a transcription service.
+Drop in a recording, choose a performance mode and language, and Transcripta creates a DOCX document locally on your computer. Speech recognition is powered by **faster-whisper / Whisper**, with NVIDIA CUDA acceleration on supported GPUs. Your recordings are not uploaded to a cloud transcription service.
 
 ## What it looks like
 
