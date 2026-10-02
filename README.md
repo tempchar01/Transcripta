@@ -1,3 +1,5 @@
+**English** | [Русский](README_RU.md)
+
 # Transcripta — Private Local AI Transcription for Windows
 
 **Transcripta 1.0.0** is a fast, privacy-focused desktop app for offline audio and video transcription on Windows 10/11.
