@@ -13,10 +13,12 @@ try { Get-TimeZone | Format-List Id,DisplayName } catch { Write-Output "Time zon
 try { w32tm /query /status 2>&1 } catch { Write-Output "Windows time service probe failed: $($_.Exception.Message)" }
 
 Write-Output "`n== Proxy and certificate environment =="
-Get-ChildItem Env:HTTP_PROXY,Env:HTTPS_PROXY,Env:ALL_PROXY,Env:NO_PROXY,Env:SSL_CERT_FILE,Env:REQUESTS_CA_BUNDLE -ErrorAction SilentlyContinue |
-    Format-Table -AutoSize
-if (-not (Get-ChildItem Env:HTTP_PROXY,Env:HTTPS_PROXY,Env:ALL_PROXY,Env:SSL_CERT_FILE,Env:REQUESTS_CA_BUNDLE -ErrorAction SilentlyContinue)) {
-    Write-Output "No proxy or certificate override environment variables are set."
+# Only presence is reported: proxy URLs can contain embedded credentials.
+$networkVariableNames = @('HTTP_PROXY', 'HTTPS_PROXY', 'ALL_PROXY', 'NO_PROXY', 'SSL_CERT_FILE', 'REQUESTS_CA_BUNDLE')
+foreach ($name in $networkVariableNames) {
+    $value = [Environment]::GetEnvironmentVariable($name)
+    if ([string]::IsNullOrEmpty($value)) { Write-Output "$name : not set" }
+    else { Write-Output "$name : configured (value redacted)" }
 }
 
 Write-Output "`n== Python / pip =="
@@ -24,8 +26,8 @@ try { py -0p 2>&1 } catch { Write-Output "Python launcher unavailable: $($_.Exce
 try {
     python -c "import ssl, certifi, sys; print('Executable:', sys.executable); print('OpenSSL:', ssl.OPENSSL_VERSION); print('Verify paths:', ssl.get_default_verify_paths()); print('certifi:', certifi.where())"
     python -m pip --version
-    python -m pip config debug
-    python -m pip config list -v
+    # pip config commands can print credentials from index URLs or environment variables.
+    Write-Output "pip configuration values: redacted (inspect locally if required)"
 } catch { Write-Output "Python/pip probe failed: $($_.Exception.Message)" }
 
 Write-Output "`n== HTTPS reachability (certificate verification remains enabled) =="
@@ -34,11 +36,11 @@ try {
     Write-Output "PowerShell HTTPS: PASS ($($response.StatusCode))"
 } catch {
     Write-Output "PowerShell HTTPS: FAIL"
-    Write-Output $_.Exception.ToString()
+    Write-Output ("PowerShell HTTPS error type: " + $_.Exception.GetType().Name)
 }
 if (Get-Command curl.exe -ErrorAction SilentlyContinue) {
     Write-Output "`ncurl.exe HTTPS:"
-    & curl.exe -I --connect-timeout 15 $Target 2>&1
+    & curl.exe -I --connect-timeout 15 --silent --show-error $Target 2>&1 | ForEach-Object { if ($_ -match "^(HTTP/|date:|content-type:)") { $_ } }
 } else {
     Write-Output "curl.exe is not available."
 }
