@@ -1,0 +1,5 @@
+# Contributing to Transcripta / Участие в проекте
+
+Bug reports, feature suggestions and documentation feedback are welcome. Search existing issues first, use the templates and include reproducible steps. Do not upload confidential audio, video and transcripts / аудио, видео и расшифровки. Discuss proposed code changes with the maintainer before submitting a pull request. Repository access does not grant additional rights to use or redistribute proprietary or third-party materials; applicable licenses remain unchanged. Do not include secrets, binaries or private test data.
+
+Приветствуются сообщения об ошибках, предложения и замечания к документации. Проверьте существующие задачи, используйте шаблоны и укажите шаги воспроизведения. Не публикуйте конфиденциальные материалы. Согласуйте изменения кода с автором до отправки pull request. Доступ к репозиторию не предоставляет дополнительных прав на распространение материалов. Действующие лицензии не меняются. Не добавляйте секреты, бинарные файлы и личные тестовые данные.
